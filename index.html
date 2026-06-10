@@ -289,7 +289,7 @@ QUIZ.forEach((t, ti) => {
   t.questions.forEach((q, qi) => {
     FLAT.push({...q, theme:t.theme, emoji:t.emoji,
       scenario: qi===0 ? t.scenario : null,
-      image: qi===0 ? t.image : null,
+      image: (qi===0 || (ti===2 && qi===1)) ? t.image : null,
       themeIndex:ti, label:`Frage ${ti+1}.${qi+1}`});
   });
 });
@@ -336,7 +336,7 @@ function renderQuestion(){
     <div class="theme-head">
       <div class="theme-emoji">${item.emoji}</div>
       <div><div class="theme-kicker">${item.theme}</div></div>
-    </div>`;
+    </div>${imgHTML}`;
 
   const opts = item.options.map((o,i)=>`
     <button class="opt" data-i="${i}" onclick="choose(${i})">
